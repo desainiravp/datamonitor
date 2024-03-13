@@ -1,0 +1,14 @@
+{
+  "name": "garafana-project",
+  "version": "1.0.0",
+  "description": "A simple Node.js application for demonstration",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+    // Add any other dependencies your application requires
+  }
+}
+
