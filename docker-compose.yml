@@ -2,8 +2,8 @@ version: '3.8'
 services:
   nodejs:
     image:project:1.0.1
-    ports:
-      - "9091:9091"
+     ports:
+       - "9091:9091"
     restart: always
 
   
