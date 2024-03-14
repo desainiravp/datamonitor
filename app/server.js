@@ -2,31 +2,35 @@ const express = require('express');
 const promClient = require('prom-client');
 
 const app = express();
-const PORT = 9091;
+const port = 9091;
 
-// Create a Prometheus registry
-const register = new promClient.Registry();
-
-// Register a counter metric
-const httpRequestCounter = new promClient.Counter({
-  name: 'http_requests_total',
-  help: 'Total number of HTTP requests',
-  labelNames: ['method', 'status_code'],
-  registers: [register]
+// Create a Prometheus counter metric
+const counter = new promClient.Counter({
+    name: 'my_custom_metric_counter',
+    help: 'Number of times a specific event occurred',
 });
 
-// Increment the counter for each incoming HTTP request
-app.use((req, res, next) => {
-  httpRequestCounter.inc({ method: req.method, status_code: res.statusCode });
-  next();
+// Route handler for the /metrics endpoint
+app.get('/metrics', async (request, response) => {
+    response.set('Content-Type', promClient.register.contentType);
+    response.send(await promClient.register.metrics());
 });
 
-// Expose metrics endpoint
-app.get('/metrics', (req, res) => {
-  res.set('Content-Type', register.contentType);
-  res.end(register.metrics());
+// Route handler for the root endpoint
+app.get('/', (req, res) => {
+    // Increment the counter for each request to the root endpoint
+    counter.inc();
+
+    // Send a response
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('Hello from port 9091!\n');
 });
 
+// Start the server
+app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}/`);
+});
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
