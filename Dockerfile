@@ -17,4 +17,4 @@ COPY . .
 EXPOSE 9091 9100
 
 # Start the Node.js application
-CMD ["node", "server.js"]i
+CMD ["node", "server.js"]
