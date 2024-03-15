@@ -8,8 +8,8 @@ WORKDIR /app
 COPY package*.json ./
 
 # Install dependencies
-RUN npm install
-RUN npm install prom-client
+
+RUN npm install express prom-client
 # Copy the rest of the application files to the working directory
 COPY app/ ./
 

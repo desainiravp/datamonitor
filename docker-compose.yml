@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   app:
-    image: my-app:latest  # Use the myapp1:latest image
+    image: my-app1:latest  # Use the myapp1:latest image
     ports:
       - "9091:9091"
     environment:
