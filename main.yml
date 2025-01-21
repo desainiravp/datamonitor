@@ -7,10 +7,11 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch: # Add this for manual triggering
 
 jobs:
   build:
-    runs-on: self-hosted  # Use the self-hosted runner
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
